@@ -24,21 +24,27 @@ $(LIBDIR)/bigint.so : lbnlib.c
   $(MAKE_MODULE) third_party/mini-gmp/mini-gmp.c -Ithird_party/mini-gmp
 
 $(LIBDIR_POSIX)/errno.so : lerrno.c
+  if [ ! -d $(LIBDIR_POSIX) ]; then mkdir $(LIBDIR_POSIX); fi
   $(MAKE_MODULE)
 
 $(LIBDIR_POSIX)/fs.so : lfslib.c
+  if [ ! -d $(LIBDIR_POSIX) ]; then mkdir $(LIBDIR_POSIX); fi
   $(MAKE_MODULE)
 
 $(LIBDIR_POSIX)/fd.so : lfdlib.c
+  if [ ! -d $(LIBDIR_POSIX) ]; then mkdir $(LIBDIR_POSIX); fi
   $(MAKE_MODULE)
 
 $(LIBDIR_POSIX)/user.so : luserlib.c
+  if [ ! -d $(LIBDIR_POSIX) ]; then mkdir $(LIBDIR_POSIX); fi
   $(MAKE_MODULE)
 
 $(LIBDIR_POSIX)/sys.so : lsyslib.c
+  if [ ! -d $(LIBDIR_POSIX) ]; then mkdir $(LIBDIR_POSIX); fi
   $(MAKE_MODULE) -DHAVE_ICONV -liconv -lm
 
 $(LIBDIR_POSIX)/ipc.so : lipclib.c
+  if [ ! -d $(LIBDIR_POSIX) ]; then mkdir $(LIBDIR_POSIX); fi
   $(MAKE_MODULE) -lrt -lm
 
 $(LIBDIR)/svipc.so : lsvipc.c
@@ -48,9 +54,11 @@ $(LIBDIR)/python.so : lua_py.c
   $(MAKE_MODULE) `pkg-config --cflags --libs python`
 
 $(LIBDIR_OTLDB)/odbc.so : luaotl_odbc.cpp lua_otl.hpp
+  if [ ! -d $(LIBDIR_OTLDB) ]; then mkdir $(LIBDIR_OTLDB); fi
   $(CXX_MAKE_MODULE) -Ithird_party/otlv4_h -lodbc
 
 $(LIBDIR_OTLDB)/oracle.so : luaotl_oracle.cpp lua_otl.hpp
+  if [ ! -d $(LIBDIR_OTLDB) ]; then mkdir $(LIBDIR_OTLDB); fi
   $(CXX_MAKE_MODULE) -Ithird_party/otlv4_h \
   -I$(ORACLE_HOME)/rdbms/demo -I$(ORACLE_HOME)/rdbms/public \
   -L$(ORACLE_HOME)/lib -lclntsh `cat $(ORACLE_HOME)/lib/sysliblist`
