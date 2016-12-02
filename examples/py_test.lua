@@ -1,0 +1,48 @@
+local py = require('python')
+require('util')
+
+local int, str = py.eval('int'), py.eval('str')
+local i, s, y = int(0xabcd), str('abcd'), str.encode('abcd')
+print('type', 'str()', 'repr()', 'tolua()')
+print(py.type(i), i, py.repr(i), type(i:tolua())..':'..i:tolua())
+print(py.type(s), s, py.repr(s), type(s:tolua())..':'..s:tolua())
+print(py.type(y), y, py.repr(y), type(y:tolua())..':'..y:tolua())
+print()
+
+local d = py.object('dict', {'a','b','c','d',a=1,b=2,c=3,d=4})
+print(py.type(d), d)
+assert(py.tolua(d[1])=='a')
+assert(d['.a']==int(1))
+print("call d['.f']:", d['.f'])
+print("call py.getitem(d,'f'):", py.getitem(d,'f'))
+xpcall(function() return d.__getitem__('f') end,
+       function(err) print("call d.__getitem__('f'):", 'raise '..err) end)
+print()
+
+local s1 = py.eval('set(range(1,n))', nil, {n=5})
+assert(s1 == py.eval('{1,2,3,4}'))
+local s2 = py.object('set', {3,4,5,6})
+assert(s1 ~= s2)
+print(string.format('s1 = %s, s2 = %s', s1, s2))
+print('s1|s2 =', s1|s2)
+print('s1&s2 =', s1&s2)
+print('s1-s2 =', s1-s2)
+print('s2-s1 =', s2-s1)
+print('s1^s2 =', s1~s2)
+print()
+
+local code = '[i**2 for i in range(1,10)]'
+local l = py.eval(code)
+io.write(code..': ')
+for i in py.iter(l) do io.write(i:tolua(), ' ') end
+print('\n')
+
+local hashlib = py.import('hashlib')
+local binascii = py.import('binascii')
+print('dir(hashlib):', repr(py.dir(hashlib)))
+assert(py.callable(hashlib.md5))
+local m = hashlib.md5()
+m.update(py.object('bytes', 'abcdefghijklmn'))
+m.update(py.call(str.encode, {'opqrstuvwxyz', encoding='utf-8'}))
+local md5sum = binascii.b2a_hex(m.digest())
+print("md5sum('abcdefghijklmnopqrstuvwxyz'):", py.tolua(md5sum))
