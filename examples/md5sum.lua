@@ -2,7 +2,7 @@ require('digest')
 require('base64')
 
 if not arg[1] then
-  print(string.format('usage: lua %s filename', arg[0]))
+	print(string.format('usage: lua %s filename', arg[0]))
 	os.exit()
 end
 local md5 = get_digest('md5')
