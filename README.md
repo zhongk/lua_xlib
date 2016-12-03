@@ -17,7 +17,7 @@ You need modify `Makefile` to building on other platforms.<br>
 <tr><td>posix.fs</td><td>lfslib.c</td><td>Posix filesystem functions: file, path, directory...</td></tr>
 <tr><td>posix.fd</td><td>lfdlib.c</td><td>Posix functions associated with file descriptor.</td></tr>
 <tr><td>posix.sys</td><td>lsyslib.c</td><td>Posix system-call functions: process, signal, timer...</td></tr>
-<tr><td>posix.ipc</td><td>lipclib.c</td><td>Posix ipc functions: shared memory,  message queue, named semaphore.</td></tr>
+<tr><td>posix.ipc</td><td>lipclib.c</td><td>Posix IPC functions: shared memory,  message queue, named semaphore.</td></tr>
 <tr><td>posix.user</td><td>luserlib.c</td><td>Posix user functions: user, group, privilege.</td></tr>
 <tr><td>posix.errno</td><td>lerrno.c</td><td>Posix errno functions: errno, strerror, perror.</td></tr>
 <tr><td>svipc</td><td>lsvipc.c</td><td>SYSV IPC interface: shared memory, message queue, semaphores.</td></tr>
