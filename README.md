@@ -32,6 +32,8 @@ You need modify `Makefile` to building on other platforms.<br>
 <tr><td>util</td><td>libs/util.lua</td><td>Some utility functions.</td></tr>
 <tr><td>base64</td><td>libs/base64.lua</td><td>Encoding and decoding for base64 and base16. requires lua-5.3</td></tr>
 <tr><td>digest</td><td>libs/digest.lua</td><td>Some secure hash algorithms: MD5, SHA1, SHA224, SHA256. requires lua-5.3</td></tr>
+<tr><td>ftp</td><td>libs/ftp.lua</td><td>ftp client</td></tr>
+<tr><td>http</td><td>libs/http.lua</td><td>http client</td></tr>
 </table>
 </div>
 
