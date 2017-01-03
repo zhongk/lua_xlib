@@ -780,6 +780,11 @@ int py2lua_type(lua_State *L, PyObject *o)
 	}else if (PyBytes_Check(o))
 	{
 		lua_pushlstring(L, PyBytes_AS_STRING(o), PyBytes_GET_SIZE(o));
+#if PY_MAJOR_VERSION < 3
+	}else if (PyInt_Check(o))
+	{
+		lua_pushinteger(L, PyInt_AsLong(o));
+#endif
 	}else if (PyLong_Check(o))
 	{
 		int overflow = 0;
